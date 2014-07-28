@@ -12,6 +12,6 @@ public class UnknownCommandException extends Exception
    @Override
    public String getMessage()
    {
-      return "Unknown command";
+      return "Unknown command."; //$NON-NLS-1$
    }
 }
