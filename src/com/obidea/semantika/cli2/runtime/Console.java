@@ -26,7 +26,7 @@ public class Console
    private volatile boolean mRunning;
    private volatile boolean mEof;
 
-   private BlockingQueue<Integer> mQueue;
+   private BlockingQueue<Integer> mQueue = new ArrayBlockingQueue<Integer>(1024);
 
    private ConsoleReader mConsoleReader;
    private ConsoleSession mConsoleSession;
