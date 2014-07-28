@@ -2,8 +2,14 @@ package com.obidea.semantika.cli2;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
+import java.util.List;
 
 import jline.Terminal;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import com.obidea.semantika.app.ApplicationFactory;
 import com.obidea.semantika.app.ApplicationManager;
@@ -16,7 +22,16 @@ public class Main
 {
    private static final String VERSION_NUMBER = "2.0"; //$NON-NLS-1$
    private static final String SEMANTIKA_CORE_VERSION_NUMBER = "1.7"; //$NON-NLS-1$
-   
+
+   @SuppressWarnings("unchecked")
+   private static List<Logger> sLoggers = Collections.list(LogManager.getCurrentLoggers());
+   static {
+      sLoggers.add(LogManager.getRootLogger());
+      for (Logger logger : sLoggers) {
+         logger.setLevel(Level.OFF);
+      }
+   }
+
    public static void main(String[] args)
    {
       Main main = new Main();
