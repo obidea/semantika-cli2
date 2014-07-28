@@ -21,7 +21,7 @@ import com.obidea.semantika.queryanswer.IQueryEngine;
 public class Main
 {
    private static final String VERSION_NUMBER = "2.0"; //$NON-NLS-1$
-   private static final String SEMANTIKA_CORE_VERSION_NUMBER = "1.7"; //$NON-NLS-1$
+   private static final String SEMANTIKA_CORE_VERSION_NUMBER = "1.7.1"; //$NON-NLS-1$
 
    @SuppressWarnings("unchecked")
    private static List<Logger> sLoggers = Collections.list(LogManager.getCurrentLoggers());
