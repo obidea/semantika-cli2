@@ -16,6 +16,8 @@ public class ConsoleSession
    private IQueryEngine mQueryEngine;
    private Map<String, String> mPrefixMapper;
 
+   private Command mCommand;
+
    public ConsoleSession(IQueryEngine engine, IPrefixManager prefixManager)
    {
       mQueryEngine = engine;
@@ -29,17 +31,22 @@ public class ConsoleSession
 
    public Object execute(String command) throws Exception
    {
-      Command cmd = CommandFactory.create(command);
-      if (cmd instanceof SelectCommand) {
-         return mQueryEngine.evaluate(cmd.arguments().get("string"));
+      mCommand = CommandFactory.create(command);
+      if (mCommand instanceof SelectCommand) {
+         return mQueryEngine.evaluate(mCommand.arguments().get("string"));
       }
-      else if (cmd instanceof SetPrefixCommand) {
-         mPrefixMapper.put(cmd.arguments().get("prefix"), cmd.arguments().get("namespace"));
+      else if (mCommand instanceof SetPrefixCommand) {
+         mPrefixMapper.put(mCommand.arguments().get("prefix"), mCommand.arguments().get("namespace"));
       }
-      else if (cmd instanceof ShowPrefixesCommand) {
+      else if (mCommand instanceof ShowPrefixesCommand) {
          return mPrefixMapper;
       }
       throw new Exception();
+   }
+
+   public Command getCommand()
+   {
+      return mCommand;
    }
 
    public void destroy() throws Exception
