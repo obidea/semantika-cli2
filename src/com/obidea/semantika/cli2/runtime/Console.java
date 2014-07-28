@@ -119,6 +119,10 @@ public class Console
             if (line == null) {
                return null; // line can be null due to Ctrl+D signal
             }
+            if (line.length() == 0 && first) {
+               continue; // skip the processing if the first input line is empty
+            }
+            
             if (endOfCommand(line)) {
                line = line.substring(0, line.length() - 2); // remove EOC marker
                loop = false;
