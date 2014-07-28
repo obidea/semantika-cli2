@@ -139,6 +139,9 @@ public class Console
 
    private boolean endOfCommand(String line)
    {
+      if (line.length() < 2) {
+         return false;
+      }
       return line.charAt(line.length() - 1) == line.charAt(line.length() - 2);
    }
 
