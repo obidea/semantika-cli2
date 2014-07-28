@@ -29,7 +29,7 @@ public class Console
    private BlockingQueue<Integer> mQueue;
 
    private ConsoleReader mConsoleReader;
-   private ConsoleSession mCommandSession;
+   private ConsoleSession mConsoleSession;
 
    public Console(IQueryEngine engine, IPrefixManager pm, String name, InputStream in,
          Terminal terminal) throws IOException
@@ -37,7 +37,7 @@ public class Console
       mConsoleName = name;
       mInputStream = in;
       mConsoleReader = new ConsoleReader(name, new ConsoleInputStream(), System.out, terminal);
-      mCommandSession = new ConsoleSession(engine, pm);
+      mConsoleSession = new ConsoleSession(engine, pm);
       mPipeThread = new Thread(new Pipe());
    }
 
@@ -54,7 +54,7 @@ public class Console
    public void run() throws Exception
    {
       try {
-         mCommandSession.start();
+         mConsoleSession.start();
          mPipeThread.start();
          mRunningThread = Thread.currentThread();
          mRunning = true;
@@ -64,7 +64,7 @@ public class Console
                if (StringUtils.isEmpty(command)) {
                   break;
                }
-               Object result = mCommandSession.execute(command);
+               Object result = mConsoleSession.execute(command);
                if (result != null) {
                   System.out.println(result);
                }
@@ -94,7 +94,7 @@ public class Console
          }
       }
       mRunning = false;
-      mCommandSession.destroy();
+      mConsoleSession.destroy();
       mPipeThread.interrupt();
       if (terminatedByUser) {
          System.out.println("Terminated by user. Good bye."); //$NON-NLS-1$
