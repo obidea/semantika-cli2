@@ -3,6 +3,7 @@ package com.obidea.semantika.cli2.runtime;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 import jline.Terminal;
@@ -38,6 +39,7 @@ public class Console
       mConsoleReader = new ConsoleReader(name, new ConsoleInputStream(), System.out, terminal);
       mConsoleSession = new ConsoleSession(engine, pm);
       mPipeThread = new Thread(new Pipe());
+      mPipeThread.setDaemon(true);
    }
 
    private String getPrompt()
