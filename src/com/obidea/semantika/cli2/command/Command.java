@@ -1,5 +1,6 @@
 package com.obidea.semantika.cli2.command;
 
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,4 +23,6 @@ public abstract class Command
    {
       return mArguments;
    }
+
+   public abstract void printOutput(PrintStream out, Object output);
 }

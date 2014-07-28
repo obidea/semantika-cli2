@@ -1,5 +1,6 @@
 package com.obidea.semantika.cli2.command;
 
+import java.io.PrintStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,5 +20,12 @@ public class SetPrefixCommand extends Command
       else {
          throw new Exception("Unknown command"); //$NON-NLS-1$
       }
+   }
+
+   @Override
+   public void printOutput(PrintStream out, Object output)
+   {
+      out.println("Prefix added.");
+      out.println();
    }
 }
