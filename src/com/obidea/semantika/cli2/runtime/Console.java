@@ -9,10 +9,9 @@ import jline.Terminal;
 import jline.console.ConsoleReader;
 import jline.console.history.PersistentHistory;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.obidea.semantika.knowledgebase.IPrefixManager;
 import com.obidea.semantika.queryanswer.IQueryEngine;
+import com.obidea.semantika.util.StringUtils;
 
 public class Console
 {
@@ -53,6 +52,7 @@ public class Console
 
    public void run() throws Exception
    {
+      boolean graceExit = false;
       try {
          mConsoleSession.start();
          mPipeThread.start();
@@ -73,10 +73,10 @@ public class Console
                System.err.println("Unknown command"); //$NON-NLS-1$
             }
          }
-         terminate(true);
+         graceExit = true;
       }
       finally {
-         terminate(false);
+         terminate(graceExit);
       }
    }
 
