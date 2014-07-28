@@ -45,6 +45,7 @@ public class Main
 
    private void initialize(String config)
    {
+      System.out.print("Initializing..."); //$NON-NLS-1$
       try {
          ApplicationManager manager = new ApplicationFactory().configure(config).createApplicationManager();
          openConsole(manager.createQueryEngine(),
@@ -79,6 +80,7 @@ public class Main
       sb.append(" ").append("SCR-").append(SEMANTIKA_CORE_VERSION_NUMBER); //$NON-NLS-1$ //$NON-NLS-2$
       sb.append(")\n"); //$NON-NLS-1$
       sb.append("Use \"Ctrl+D\" to exit.\n"); //$NON-NLS-1$
+      System.out.print("\r"); //$NON-NLS-1$
       System.out.println(sb.toString());
    }
 }
