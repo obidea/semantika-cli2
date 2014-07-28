@@ -26,7 +26,7 @@ public class ConsoleSession
    {
       Command cmd = CommandFactory.create(command);
       if (cmd instanceof SelectCommand) {
-         return mQueryEngine.evaluate(cmd.arguments().get("value"));
+         return mQueryEngine.evaluate(cmd.arguments().get("string"));
       }
       else if (cmd instanceof SetPrefixCommand) {
          mPrefixMapper.put(cmd.arguments().get("prefix"), cmd.arguments().get("namespace"));
