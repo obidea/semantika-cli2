@@ -78,7 +78,7 @@ public class Main
       sb.append(" ").append("(").append(VERSION_NUMBER); //$NON-NLS-1$ //$NON-NLS-2$
       sb.append(" ").append("SCR-").append(SEMANTIKA_CORE_VERSION_NUMBER); //$NON-NLS-1$ //$NON-NLS-2$
       sb.append(")\n"); //$NON-NLS-1$
-      sb.append("Type \"help\" for help.\n"); //$NON-NLS-1$
+      sb.append("Use \"Ctrl+D\" to exit.\n"); //$NON-NLS-1$
       System.out.println(sb.toString());
    }
 }
