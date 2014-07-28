@@ -103,7 +103,6 @@ public class Console
       if (terminatedByUser) {
          System.out.println("Terminated by user. Good bye."); //$NON-NLS-1$
       }
-      System.out.println(); // newline
    }
 
    private String readCommand()
