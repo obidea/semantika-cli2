@@ -136,7 +136,9 @@ public class Console
          }
          catch (IOException e) {
             first = true; // back to initial prompt
-            System.err.println(e.getMessage());
+            if (e.getMessage() != null) {
+               System.err.println(e.getMessage());
+            }
          }
       }
       return command.toString().trim();
@@ -199,7 +201,7 @@ public class Console
                mQueue.put(-1);
             }
             catch (InterruptedException e) {
-               System.err.println(e.getMessage());
+               e.printStackTrace();
             }
          }
       }
