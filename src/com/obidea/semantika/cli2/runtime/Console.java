@@ -128,7 +128,11 @@ public class Console
                first = false;
             }
             command.append(line).append("\n");
-            mConsoleReader.getHistory().add(line);
+            
+            // Save to history if the line is not empty
+            if (line.trim().length() > 0) {
+               mConsoleReader.getHistory().add(line);
+            }
          }
          catch (IOException e) {
             System.err.println(e.getMessage());
