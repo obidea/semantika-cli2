@@ -41,7 +41,9 @@ public class SelectCommand extends Command
    {
       if (output instanceof IQueryResult) {
          IQueryResult result = (IQueryResult) output;
-         out.println(result.toString());
+         while (result.next()) {
+            out.println(result.getValueArray());
+         }
       }
       out.println();
    }
