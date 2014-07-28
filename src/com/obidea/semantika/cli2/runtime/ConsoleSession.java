@@ -41,7 +41,7 @@ public class ConsoleSession
       else if (mCommand instanceof ShowPrefixesCommand) {
          return mPrefixMapper;
       }
-      throw new Exception();
+      throw new UnknownCommandException();
    }
 
    public Command getCommand()

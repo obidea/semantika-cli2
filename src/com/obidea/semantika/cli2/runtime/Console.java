@@ -71,8 +71,11 @@ public class Console
                   mConsoleSession.getCommand().printOutput(System.out, result);
                }
             }
+            catch (UnknownCommandException e) {
+               System.err.println(e.getMessage()); //$NON-NLS-1$
+            }
             catch (Exception e) {
-               System.err.println("Unknown command"); //$NON-NLS-1$
+               e.printStackTrace();
             }
          }
          graceExit = true;
