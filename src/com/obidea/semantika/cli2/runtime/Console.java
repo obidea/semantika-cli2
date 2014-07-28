@@ -10,6 +10,8 @@ import jline.Terminal;
 import jline.console.ConsoleReader;
 import jline.console.history.PersistentHistory;
 
+import com.obidea.semantika.cli2.command.UnknownCommandException;
+
 import com.obidea.semantika.knowledgebase.IPrefixManager;
 import com.obidea.semantika.queryanswer.IQueryEngine;
 

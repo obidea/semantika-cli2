@@ -1,7 +1,6 @@
 package com.obidea.semantika.cli2.command;
 
 import com.obidea.semantika.cli2.runtime.ConsoleSession;
-import com.obidea.semantika.cli2.runtime.UnknownCommandException;
 
 public class CommandFactory
 {

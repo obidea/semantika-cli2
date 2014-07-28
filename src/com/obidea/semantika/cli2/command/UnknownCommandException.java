@@ -1,4 +1,4 @@
-package com.obidea.semantika.cli2.runtime;
+package com.obidea.semantika.cli2.command;
 
 public class UnknownCommandException extends Exception
 {
