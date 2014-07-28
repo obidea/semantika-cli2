@@ -7,6 +7,7 @@ import java.util.concurrent.BlockingQueue;
 
 import jline.Terminal;
 import jline.console.ConsoleReader;
+import jline.console.history.PersistentHistory;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -50,26 +51,55 @@ public class Console
       return "> ";
    }
 
-   public void run()
+   public void run() throws Exception
    {
-      mPipeThread.start();
-      mRunningThread = Thread.currentThread();
-      mRunning = true;
-      while (mRunning) {
-         try {
-            String command = readCommand();
-            if (StringUtils.isEmpty(command)) {
-               break;
+      try {
+         mCommandSession.start();
+         mPipeThread.start();
+         mRunningThread = Thread.currentThread();
+         mRunning = true;
+         while (mRunning) {
+            try {
+               String command = readCommand();
+               if (StringUtils.isEmpty(command)) {
+                  break;
+               }
+               Object result = mCommandSession.execute(command);
+               if (result != null) {
+                  System.out.println(result);
+               }
             }
-            Object result = mCommandSession.execute(command);
-            if (result != null) {
-               System.out.println(result);
+            catch (Exception e) {
+               System.err.println("Unknown command"); //$NON-NLS-1$
             }
          }
-         catch (Exception e) {
-            System.err.println("Unknown command");
+         terminate(true);
+      }
+      finally {
+         terminate(false);
+      }
+   }
+
+   public void terminate(boolean terminatedByUser) throws Exception
+   {
+      if (!mRunning) {
+         return;
+      }
+      if (mConsoleReader.getHistory() instanceof PersistentHistory) {
+         try {
+            ((PersistentHistory) mConsoleReader.getHistory()).flush();
+         }
+         catch (IOException e) {
+            // NO-OP: Ignore
          }
       }
+      mRunning = false;
+      mCommandSession.destroy();
+      mPipeThread.interrupt();
+      if (terminatedByUser) {
+         System.out.println("Terminated by user. Good bye."); //$NON-NLS-1$
+      }
+      System.out.println(); // newline
    }
 
    private String readCommand()

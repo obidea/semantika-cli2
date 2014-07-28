@@ -22,6 +22,11 @@ public class ConsoleSession
       mPrefixMapper = new HashMap<String, String>(prefixManager.getPrefixMapper());
    }
 
+   public void start() throws Exception
+   {
+      mQueryEngine.start();
+   }
+
    public Object execute(String command) throws Exception
    {
       Command cmd = CommandFactory.create(command);
@@ -35,5 +40,10 @@ public class ConsoleSession
          return mPrefixMapper;
       }
       throw new Exception();
+   }
+
+   public void destroy() throws Exception
+   {
+      mQueryEngine.stop();
    }
 }
