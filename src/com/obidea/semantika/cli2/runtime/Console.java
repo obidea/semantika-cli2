@@ -12,7 +12,6 @@ import jline.console.history.PersistentHistory;
 
 import com.obidea.semantika.knowledgebase.IPrefixManager;
 import com.obidea.semantika.queryanswer.IQueryEngine;
-import com.obidea.semantika.util.StringUtils;
 
 public class Console
 {
@@ -63,8 +62,8 @@ public class Console
          while (mRunning) {
             try {
                String command = readCommand();
-               if (StringUtils.isEmpty(command)) {
-                  break;
+               if (command == null) {
+                  break; // exit the loop if command is null
                }
                Object result = mConsoleSession.execute(command);
                if (result != null) {
@@ -117,7 +116,7 @@ public class Console
             checkInterrupt();
             String line = mConsoleReader.readLine(first ? getPrompt() : getAltPrompt());
             if (line == null) {
-               break;
+               return null; // line can be null due to Ctrl+D signal
             }
             if (endOfCommand(line)) {
                line = line.substring(0, line.length() - 2); // remove EOC marker
