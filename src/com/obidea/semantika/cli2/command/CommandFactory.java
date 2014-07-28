@@ -1,10 +1,11 @@
 package com.obidea.semantika.cli2.command;
 
 import com.obidea.semantika.cli2.runtime.ConsoleSession;
+import com.obidea.semantika.cli2.runtime.UnknownCommandException;
 
 public class CommandFactory
 {
-   public static Command create(String command, ConsoleSession session) throws Exception
+   public static Command create(String command, ConsoleSession session) throws UnknownCommandException
    {
       if (startsWith(command, Command.SELECT)) {
          return new SelectCommand(command, session);
@@ -15,7 +16,7 @@ public class CommandFactory
       else if (startsWith(command, Command.SHOW_PREFIXES)) {
          return new ShowPrefixesCommand(command, session);
       }
-      throw new Exception("Unknown command"); //$NON-NLS-1$
+      throw new UnknownCommandException(); //$NON-NLS-1$
    }
 
    private static boolean startsWith(String command, String keyword)
