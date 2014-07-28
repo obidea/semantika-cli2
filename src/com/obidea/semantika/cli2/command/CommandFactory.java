@@ -4,15 +4,20 @@ public class CommandFactory
 {
    public static Command create(String command) throws Exception
    {
-      if (command.startsWith(Command.SELECT)) {
+      if (startsWith(command, Command.SELECT)) {
          return new SelectCommand(command);
       }
-      else if (command.startsWith(Command.SET_PREFIX)) {
+      else if (startsWith(command, Command.SET_PREFIX)) {
          return new SetPrefixCommand(command);
       }
-      else if (command.startsWith(Command.SHOW_PREFIXES)) {
+      else if (startsWith(command, Command.SHOW_PREFIXES)) {
          return new ShowPrefixesCommand(command);
       }
       throw new Exception("Unknown command"); //$NON-NLS-1$
+   }
+
+   private static boolean startsWith(String command, String keyword)
+   {
+      return command.startsWith(keyword) || command.startsWith(keyword.toUpperCase());
    }
 }
