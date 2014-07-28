@@ -66,7 +66,7 @@ public class Console
                }
                Object result = mConsoleSession.execute(command);
                if (result != null) {
-                  System.out.println(result);
+                  mConsoleSession.getCommand().printOutput(System.out, result);
                }
             }
             catch (Exception e) {
