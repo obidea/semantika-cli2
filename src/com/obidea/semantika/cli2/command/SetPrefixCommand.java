@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.obidea.semantika.cli2.runtime.ConsoleSession;
-import com.obidea.semantika.cli2.runtime.UnknownCommandException;
 
 public class SetPrefixCommand extends Command
 {
@@ -17,7 +16,7 @@ public class SetPrefixCommand extends Command
    private String mPrefix;
    private String mNamespace;
 
-   public SetPrefixCommand(String command, ConsoleSession session) throws Exception
+   public SetPrefixCommand(String command, ConsoleSession session) throws InvalidSyntaxException
    {
       mSession = session;
       Matcher m = setPrefixCommand.matcher(command);
@@ -26,7 +25,7 @@ public class SetPrefixCommand extends Command
          mNamespace = m.group(2).trim();
       }
       else {
-         throw new UnknownCommandException();
+         throw new InvalidSyntaxException("Usage: SET PREFIX \"prefix\" WITH NAMESPACE \"namespace\"");
       }
    }
 
