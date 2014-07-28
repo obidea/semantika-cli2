@@ -10,8 +10,6 @@ import jline.Terminal;
 import jline.console.ConsoleReader;
 import jline.console.history.PersistentHistory;
 
-import com.obidea.semantika.cli2.command.UnknownCommandException;
-
 import com.obidea.semantika.knowledgebase.IPrefixManager;
 import com.obidea.semantika.queryanswer.IQueryEngine;
 
@@ -72,11 +70,8 @@ public class Console
                   mConsoleSession.getCommand().printOutput(System.out, result);
                }
             }
-            catch (UnknownCommandException e) {
-               System.err.println(e.getMessage()); //$NON-NLS-1$
-            }
             catch (Exception e) {
-               e.printStackTrace();
+               System.err.println(e.getMessage());
             }
          }
          graceExit = true;
