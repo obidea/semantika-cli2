@@ -3,11 +3,21 @@ package com.obidea.semantika.cli2.command;
 import java.io.PrintStream;
 import java.util.Map;
 
+import com.obidea.semantika.cli2.runtime.ConsoleSession;
+
 public class ShowPrefixesCommand extends Command
 {
-   public ShowPrefixesCommand(String command)
+   private ConsoleSession mSession;
+
+   public ShowPrefixesCommand(String command, ConsoleSession session)
    {
-      super(command);
+      mSession = session;
+   }
+
+   @Override
+   public Object execute() throws Exception
+   {
+      return mSession.getPrefixMapper();
    }
 
    @Override

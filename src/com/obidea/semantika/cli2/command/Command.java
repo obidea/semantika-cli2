@@ -1,8 +1,6 @@
 package com.obidea.semantika.cli2.command;
 
 import java.io.PrintStream;
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class Command
 {
@@ -12,17 +10,7 @@ public abstract class Command
 
    protected static final String SHOW_PREFIXES = "show prefixes"; //$NON-NLS-1$
 
-   private Map<String, String> mArguments = new HashMap<String, String>();
-
-   public Command(String command)
-   {
-      mArguments.put("string", command);
-   }
-
-   public Map<String, String> arguments()
-   {
-      return mArguments;
-   }
+   public abstract Object execute() throws Exception;
 
    public abstract void printOutput(PrintStream out, Object output);
 }

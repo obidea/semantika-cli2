@@ -1,14 +1,39 @@
 package com.obidea.semantika.cli2.command;
 
+import static java.lang.String.format;
+
 import java.io.PrintStream;
 
+import com.obidea.semantika.cli2.runtime.ConsoleSession;
 import com.obidea.semantika.queryanswer.result.IQueryResult;
 
 public class SelectCommand extends Command
 {
-   public SelectCommand(String selectQuery)
+   private String mCommand;
+   private ConsoleSession mSession;
+
+   public SelectCommand(String command, ConsoleSession session)
    {
-      super(selectQuery);
+      mCommand = command;
+      mSession = session;
+   }
+
+   @Override
+   public Object execute() throws Exception
+   {
+      String sparql = createSelectQuery();
+      return mSession.getQueryEngine().evaluate(sparql);
+   }
+
+   private String createSelectQuery()
+   {
+      StringBuilder sb = new StringBuilder();
+      for (String prefix : mSession.getPrefixMapper().keySet()) {
+         sb.append(format("PREFIX %s: <%s>", prefix, mSession.getPrefixMapper().get(prefix)));
+         sb.append("\n");
+      }
+      sb.append(mCommand);
+      return sb.toString();
    }
 
    @Override
