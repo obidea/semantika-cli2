@@ -135,6 +135,7 @@ public class Console
             }
          }
          catch (IOException e) {
+            first = true; // back to initial prompt
             System.err.println(e.getMessage());
          }
       }
