@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.Map;
 
 import com.obidea.semantika.cli2.runtime.ConsoleSession;
+import com.obidea.semantika.util.StringUtils;
 
 public class ShowPrefixesCommand extends Command
 {
@@ -26,8 +27,12 @@ public class ShowPrefixesCommand extends Command
       if (output instanceof Map<?, ?>) {
          @SuppressWarnings("unchecked")
          Map<String, String> map = (Map<String, String>) output;
-         for (String prefix : map.keySet()) {
-            out.println(prefix + ": " + map.get(prefix));
+         for (String key : map.keySet()) {
+            String prefix = key;
+            if (StringUtils.isEmpty(prefix)) {
+               prefix = "(default)"; //
+            }
+            out.println(prefix + " = " + map.get(key));
          }
       }
       out.println();
