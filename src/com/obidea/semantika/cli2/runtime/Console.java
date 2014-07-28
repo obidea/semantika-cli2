@@ -114,7 +114,7 @@ public class Console
             checkInterrupt();
             String line = mConsoleReader.readLine(first ? getPrompt() : getAltPrompt());
             if (endOfCommand(line)) {
-               line = line.substring(0, line.charAt(line.length() - 2)); // remove EOC marker
+               line = line.substring(0, line.length() - 2); // remove EOC marker
                loop = false;
             }
             else {
