@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
+import java.io.PrintStream;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -18,7 +19,10 @@ import com.obidea.semantika.queryanswer.IQueryEngine;
 public class Console
 {
    private String mConsoleName;
+
    private InputStream mInputStream;
+   private static PrintStream mOutputStream;
+   private static PrintStream mErrorStream;
 
    private Thread mPipeThread;
    private Thread mRunningThread;
@@ -32,11 +36,13 @@ public class Console
    private ConsoleReader mConsoleReader;
    private ConsoleSession mConsoleSession;
 
-   public Console(IQueryEngine engine, IPrefixManager pm, String name, InputStream in,
+   public Console(IQueryEngine engine, IPrefixManager pm, String name, InputStream inputSource,
          Terminal terminal) throws IOException
    {
       mConsoleName = name;
-      mInputStream = in;
+      mInputStream = inputSource;
+      mOutputStream = System.out;
+      mErrorStream = System.err;
       mConsoleReader = createConsoleReader(name, terminal);
       mConsoleSession = new ConsoleSession(engine, pm);
       mPipeThread = new Thread(new Pipe());
@@ -45,7 +51,7 @@ public class Console
 
    private ConsoleReader createConsoleReader(String name, Terminal terminal) throws IOException
    {
-      ConsoleReader reader = new ConsoleReader(name, new ConsoleInputStream(), System.out, terminal);
+      ConsoleReader reader = new ConsoleReader(name, new ConsoleInputStream(), mOutputStream, terminal);
       reader.setHistoryEnabled(false); // we will insert history manually
       reader.setHistory(new FileHistory(getHistoryFile()));
       return reader;
@@ -83,7 +89,7 @@ public class Console
                }
                Object result = mConsoleSession.execute(command);
                if (result != null) {
-                  mConsoleSession.getCommand().printOutput(System.out, result);
+                  mConsoleSession.getCommand().printOutput(mOutputStream, result);
                }
             }
             catch (Exception e) {
@@ -251,11 +257,11 @@ public class Console
 
    protected static void error(String message)
    {
-      System.err.println(message); //$NON-NLS-1$
+      mErrorStream.println(message); //$NON-NLS-1$
    }
 
    protected static void info(String message)
    {
-      System.out.println(message);
+      mOutputStream.println(message);
    }
 }
