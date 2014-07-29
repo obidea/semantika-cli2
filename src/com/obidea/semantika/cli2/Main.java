@@ -59,11 +59,11 @@ public class Main
    private void openConsole(IQueryEngine engine, IPrefixManager pm, String name) throws Exception
    {
       final TerminalFactory terminalFactory = new TerminalFactory();
-      Console console = createInteractiveConsole(engine, pm, name, terminalFactory.get());
+      Console console = createInteractiveConsole(name, engine, pm, terminalFactory.get());
       console.run();
    }
 
-   private Console createInteractiveConsole(IQueryEngine engine, IPrefixManager pm, String name,
+   private Console createInteractiveConsole(String name, IQueryEngine engine, IPrefixManager pm,
          Terminal terminal) throws IOException
    {
       showBanner();
