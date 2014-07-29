@@ -21,8 +21,8 @@ public class Console
    private String mConsoleName;
 
    private InputStream mInputStream;
-   private static PrintStream mOutputStream;
-   private static PrintStream mErrorStream;
+   private PrintStream mOutputStream;
+   private PrintStream mErrorStream;
 
    private Thread mPipeThread;
    private Thread mRunningThread;
@@ -36,13 +36,18 @@ public class Console
    private ConsoleReader mConsoleReader;
    private ConsoleSession mConsoleSession;
 
-   public Console(IQueryEngine engine, IPrefixManager pm, String name, InputStream inputSource,
-         Terminal terminal) throws IOException
+   public Console(String name, IQueryEngine engine, IPrefixManager pm, Terminal terminal) throws IOException
+   {
+      this(name, engine, pm, System.in, System.out, System.err, terminal);
+   }
+
+   public Console(String name, IQueryEngine engine, IPrefixManager pm, InputStream inputSource, PrintStream outputTarget,
+         PrintStream errorTarget, Terminal terminal) throws IOException
    {
       mConsoleName = name;
       mInputStream = inputSource;
-      mOutputStream = System.out;
-      mErrorStream = System.err;
+      mOutputStream = outputTarget;
+      mErrorStream = errorTarget;
       mConsoleReader = createConsoleReader(name, terminal);
       mConsoleSession = new ConsoleSession(engine, pm);
       mPipeThread = new Thread(new Pipe());
@@ -255,13 +260,13 @@ public class Console
       }
    }
 
-   protected static void error(String message)
-   {
-      mErrorStream.println(message); //$NON-NLS-1$
-   }
-
-   protected static void info(String message)
+   protected void info(String message)
    {
       mOutputStream.println(message);
+   }
+
+   protected void error(String message)
+   {
+      mErrorStream.println(message);
    }
 }

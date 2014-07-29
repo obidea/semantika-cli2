@@ -1,7 +1,6 @@
 package com.obidea.semantika.cli2;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,8 +67,7 @@ public class Main
          Terminal terminal) throws IOException
    {
       showBanner();
-      InputStream in = System.in; // listen the keyboard
-      return new Console(engine, pm, name, in, terminal);
+      return new Console(name, engine, pm, terminal);
    }
 
    private void showBanner()
