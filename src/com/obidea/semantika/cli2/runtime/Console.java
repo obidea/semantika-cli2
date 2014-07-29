@@ -87,7 +87,7 @@ public class Console
                }
             }
             catch (Exception e) {
-               System.err.println(e.getMessage());
+               error(e.getMessage());
             }
          }
          graceExit = true;
@@ -107,14 +107,14 @@ public class Console
             ((PersistentHistory) mConsoleReader.getHistory()).flush();
          }
          catch (IOException e) {
-            System.err.println(e.getMessage());
+            error(e.getMessage());
          }
       }
       mRunning = false;
       mConsoleSession.destroy();
       mPipeThread.interrupt();
       if (terminatedByUser) {
-         System.out.println("Terminated by user. Good bye."); //$NON-NLS-1$
+         info("Terminated by user. Good bye."); //$NON-NLS-1$
       }
    }
 
@@ -152,7 +152,7 @@ public class Console
          catch (IOException e) {
             first = true; // back to initial prompt
             if (e.getMessage() != null) {
-               System.err.println(e.getMessage());
+               error(e.getMessage());
             }
          }
       }
@@ -194,12 +194,12 @@ public class Console
                      case -1 :
                         return;
                      case 3 : // ASCII code for CTRL+C
-                        System.err.println("^C");
+                        info("^C");
                         mConsoleReader.getCursorBuffer().clear();
                         interrupt();
                         break;
                      case 4 : // ASCII code for CTRL+D
-                        System.err.println("^D");
+                        info("^D");
                         return;
                      default :
                         mQueue.put(c);
@@ -216,7 +216,7 @@ public class Console
                mQueue.put(-1);
             }
             catch (InterruptedException e) {
-               e.printStackTrace();
+               error(e.getMessage());
             }
          }
       }
@@ -247,5 +247,15 @@ public class Console
          }
          return i;
       }
+   }
+
+   protected static void error(String message)
+   {
+      System.err.println(message); //$NON-NLS-1$
+   }
+
+   protected static void info(String message)
+   {
+      System.out.println(message);
    }
 }
