@@ -1,5 +1,6 @@
 package com.obidea.semantika.cli2.runtime;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
@@ -8,6 +9,7 @@ import java.util.concurrent.BlockingQueue;
 
 import jline.Terminal;
 import jline.console.ConsoleReader;
+import jline.console.history.FileHistory;
 import jline.console.history.PersistentHistory;
 
 import com.obidea.semantika.knowledgebase.IPrefixManager;
@@ -35,10 +37,24 @@ public class Console
    {
       mConsoleName = name;
       mInputStream = in;
-      mConsoleReader = new ConsoleReader(name, new ConsoleInputStream(), System.out, terminal);
+      mConsoleReader = createConsoleReader(name, terminal);
       mConsoleSession = new ConsoleSession(engine, pm);
       mPipeThread = new Thread(new Pipe());
       mPipeThread.setDaemon(true);
+   }
+
+   private ConsoleReader createConsoleReader(String name, Terminal terminal) throws IOException
+   {
+      ConsoleReader reader = new ConsoleReader(name, new ConsoleInputStream(), System.out, terminal);
+      reader.setHistoryEnabled(false); // we will insert history manually
+      reader.setHistory(new FileHistory(getHistoryFile()));
+      return reader;
+   }
+
+   protected File getHistoryFile()
+   {
+      String defaultHistoryPath = new File(System.getProperty("user.home"), ".semantika_history").toString();
+      return new File(System.getProperty("semantika.history", defaultHistoryPath));
    }
 
    private String getPrompt()
@@ -91,7 +107,7 @@ public class Console
             ((PersistentHistory) mConsoleReader.getHistory()).flush();
          }
          catch (IOException e) {
-            // NO-OP: Ignore
+            System.err.println(e.getMessage());
          }
       }
       mRunning = false;
