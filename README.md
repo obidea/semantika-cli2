@@ -37,3 +37,14 @@ prompt> show prefixes;;
 ```
 prompt> set prefix "smp" with namespace "http://example.org/simple#";;
 ```
+
+Insert two same characters consecutively to end the command (e.g., `;;`, `  `, etc).
+
+User's Guide
+------------
+
+1. [Download and unzip the latest release](https://github.com/obidea/semantika-cli2/releases).
+2. Create the application-domain model.
+3. Setup the configuration file.
+4. Place the proper JDBC driver inside the `jdbc/` folder
+5. Run `semantika <configuration-file>`
