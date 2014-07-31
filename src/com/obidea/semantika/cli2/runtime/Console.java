@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
 import java.io.PrintStream;
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -13,7 +14,6 @@ import jline.console.ConsoleReader;
 import jline.console.history.FileHistory;
 import jline.console.history.PersistentHistory;
 
-import com.obidea.semantika.knowledgebase.IPrefixManager;
 import com.obidea.semantika.queryanswer.IQueryEngine;
 
 public class Console
@@ -36,20 +36,20 @@ public class Console
    private ConsoleReader mConsoleReader;
    private ConsoleSession mConsoleSession;
 
-   public Console(String name, IQueryEngine engine, IPrefixManager pm, Terminal terminal) throws IOException
+   public Console(String name, IQueryEngine engine, Map<String, String> prefixes, Terminal terminal) throws IOException
    {
-      this(name, engine, pm, System.in, System.out, System.err, terminal);
+      this(name, engine, prefixes, System.in, System.out, System.err, terminal);
    }
 
-   public Console(String name, IQueryEngine engine, IPrefixManager pm, InputStream inputSource, PrintStream outputTarget,
-         PrintStream errorTarget, Terminal terminal) throws IOException
+   public Console(String name, IQueryEngine engine, Map<String, String> prefixes, InputStream inputSource,
+         PrintStream outputTarget, PrintStream errorTarget, Terminal terminal) throws IOException
    {
       mConsoleName = name;
       mInputStream = inputSource;
       mOutputStream = outputTarget;
       mErrorStream = errorTarget;
       mConsoleReader = createConsoleReader(name, terminal);
-      mConsoleSession = new ConsoleSession(engine, pm);
+      mConsoleSession = new ConsoleSession(engine, prefixes);
       mPipeThread = new Thread(new Pipe());
       mPipeThread.setDaemon(true);
    }

@@ -32,7 +32,7 @@ public class SetPrefixCommand extends Command
    @Override
    public Object execute() throws Exception
    {
-      mSession.getPrefixMapper().put(mPrefix, mNamespace);
+      mSession.getPrefixes().put(mPrefix, mNamespace);
       return "Prefix added."; //$NON-NLS-1$
    }
 

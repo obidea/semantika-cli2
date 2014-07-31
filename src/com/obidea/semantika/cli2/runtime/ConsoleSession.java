@@ -1,24 +1,22 @@
 package com.obidea.semantika.cli2.runtime;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.obidea.semantika.cli2.command.Command;
 import com.obidea.semantika.cli2.command.CommandFactory;
-import com.obidea.semantika.knowledgebase.IPrefixManager;
 import com.obidea.semantika.queryanswer.IQueryEngine;
 
 public class ConsoleSession
 {
    private IQueryEngine mQueryEngine;
-   private Map<String, String> mPrefixMapper;
+   private Map<String, String> mPrefixes;
 
    private Command mCommand;
 
-   public ConsoleSession(IQueryEngine engine, IPrefixManager prefixManager)
+   public ConsoleSession(IQueryEngine engine, Map<String, String> prefixes)
    {
       mQueryEngine = engine;
-      mPrefixMapper = new HashMap<String, String>(prefixManager.getPrefixMapper());
+      mPrefixes = prefixes;
    }
 
    public void start() throws Exception
@@ -31,9 +29,9 @@ public class ConsoleSession
       return mQueryEngine;
    }
 
-   public Map<String, String> getPrefixMapper()
+   public Map<String, String> getPrefixes()
    {
-      return mPrefixMapper;
+      return mPrefixes;
    }
 
    public Object execute(String command) throws Exception

@@ -2,7 +2,9 @@ package com.obidea.semantika.cli2;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jline.Terminal;
 
@@ -47,27 +49,28 @@ public class Main
       System.out.print("Initializing..."); //$NON-NLS-1$
       try {
          ApplicationManager manager = new ApplicationFactory().configure(config).createApplicationManager();
-         openConsole(manager.createQueryEngine(),
-               manager.getSettings().getPrefixManager(),
-               manager.getSettings().getApplicationFactoryName());
+         openConsole(manager.getApplicationName(),
+               manager.createQueryEngine(),
+               manager.getPrefixManager());
       }
       catch (Exception e) {
          System.err.println(e.getMessage());
       }
    }
 
-   private void openConsole(IQueryEngine engine, IPrefixManager pm, String name) throws Exception
+   private void openConsole(String consoleName, IQueryEngine engine, IPrefixManager pm) throws Exception
    {
-      final TerminalFactory terminalFactory = new TerminalFactory();
-      Console console = createInteractiveConsole(name, engine, pm, terminalFactory.get());
+      TerminalFactory terminalFactory = new TerminalFactory();
+      Map<String, String> prefixes = new HashMap<String, String>(pm.getPrefixMapper());
+      Console console = createInteractiveConsole(consoleName, engine, prefixes, terminalFactory.get());
       console.run();
    }
 
-   private Console createInteractiveConsole(String name, IQueryEngine engine, IPrefixManager pm,
+   private Console createInteractiveConsole(String name, IQueryEngine engine, Map<String, String> prefixes,
          Terminal terminal) throws IOException
    {
       showBanner();
-      return new Console(name, engine, pm, terminal);
+      return new Console(name, engine, prefixes, terminal);
    }
 
    private void showBanner()

@@ -28,8 +28,8 @@ public class SelectCommand extends Command
    private String createSelectQuery()
    {
       StringBuilder sb = new StringBuilder();
-      for (String prefix : mSession.getPrefixMapper().keySet()) {
-         sb.append(format("PREFIX %s: <%s>", prefix, mSession.getPrefixMapper().get(prefix)));
+      for (String prefix : mSession.getPrefixes().keySet()) {
+         sb.append(format("PREFIX %s: <%s>", prefix, mSession.getPrefixes().get(prefix)));
          sb.append("\n");
       }
       sb.append(mCommand);

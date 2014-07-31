@@ -18,7 +18,7 @@ public class ShowPrefixesCommand extends Command
    @Override
    public Object execute() throws Exception
    {
-      return mSession.getPrefixMapper();
+      return mSession.getPrefixes();
    }
 
    @Override
