@@ -1,6 +1,6 @@
 Semantika CLI2
 ==============
-The next generation of Semantika CLI that provides an interactive command line utility for data query and debugging.
+The next generation of Semantika CLI that provides an interactive command line utility for data querying and debugging.
 
 Latest news: [2.0 (build 17.1) is now available](https://github.com/obidea/semantika-cli2/releases/tag/v2.0_17.1) (July 31, 2014)
 
