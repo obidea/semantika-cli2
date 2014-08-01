@@ -1,6 +1,6 @@
 Semantika CLI2
 ==============
-The next generation of Semantika CLI that provides an interactive command line utility for data querying and debugging.
+The next generation of Semantika CLI that provides an interactive command line utility for SPARQL querying over existing database. The tool runs on Semantika framework that uses *data-to-domain mappings* (see [the example](https://github.com/obidea/semantika-api/blob/master/model/empdb.mod.xml)). The CLI tool will parse and process the input model and prepare you the query engine automatically.
 
 Latest news: [2.0 (build 17.1) is now available](https://github.com/obidea/semantika-cli2/releases/tag/v2.0_17.1) (July 31, 2014)
 
