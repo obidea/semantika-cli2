@@ -44,7 +44,13 @@ User's Guide
 ------------
 
 1. [Download and unzip the latest release](https://github.com/obidea/semantika-cli2/releases).
-2. Create the application-domain model.
-3. Setup the configuration file.
+2. Create the [semantika-domain model](https://github.com/obidea/semantika-api/wiki/2.-Basic-RDB-RDF-Mapping).
+3. Setup the [configuration file](https://github.com/obidea/semantika-api/wiki/1.-Semantika-Configuration).
 4. Place the proper JDBC driver inside the `jdbc/` folder
 5. Run `semantika <configuration-file>`
+
+Need Help?
+----------
+
+Check [our Wikipage](https://github.com/obidea/semantika-api/wiki) for a brief introduction.
+Need more help? Join [OBDA Semantika Forum](https://groups.google.com/forum/#!forum/obda-semantika).
