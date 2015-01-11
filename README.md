@@ -1,6 +1,6 @@
 Semantika CLI2
 ==============
-The next generation of Semantika CLI that provides an interactive command line utility for SPARQL querying over existing database. The tool runs on Semantika API. The CLI tool will parse and process the input model and prepare you the query engine automatically.
+The next generation of Semantika CLI that provides an interactive command line utility for SPARQL querying over existing database. The tool runs using [Semantika API](https://github.com/obidea/semantika-core). It gives a service interface for querying your existing database in SPARQL language.
 
 Latest news: [2.0 (build 17.1-rev1) is now available](https://github.com/obidea/semantika-cli2/releases/download/v2.0_17.1-rev1/semantika-cli2-2.0_17.1-rev1.zip) (January 11, 2015)
 
