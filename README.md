@@ -49,9 +49,9 @@ Insert a blank line by tapping the <ENTER> key twice to run the command.
 Demo Application
 ----------------
 
-1. [Download and unzip the latest release](https://github.com/obidea/semantika-cli2/releases). Note the directory structure.
+- [Download and unzip the latest release](https://github.com/obidea/semantika-cli2/releases). The package has a directory structure:
 ```
-root
+root/
   +-jdbc/
   +-lib/
   +-model/
@@ -61,10 +61,10 @@ root
   semantika
   semantika-cli-2.0.jar
 ```
-2. [Download the EMPDB database for H2](https://github.com/obidea/semantika-api/releases/download/v1.1/h2-semantika_24-02-2014.zip). Unpack and run the database in your local computer.
-3. Put the [H2 driver](https://github.com/obidea/semantika-api/blob/master/jdbc/h2-1.3.174.jar?raw=true) inside the `jdbc/` folder,
-4. Put both [the mapping model](https://raw.githubusercontent.com/obidea/semantika-api/master/model/empdb.mod.xml) and [the ontology](https://raw.githubusercontent.com/obidea/semantika-api/master/model/empdb.owl) inside `model/` folder,
-5. Edit the `application.cfg.xml` to configure the database setting and model resources. Code snippet:
+- [Download and unzip the demo empdb database](https://github.com/obidea/semantika-api/releases/download/v1.1/h2-semantika_24-02-2014.zip). Run the H2 database in your local computer.
+- Put the [H2 driver](https://github.com/obidea/semantika-api/blob/master/jdbc/h2-1.3.174.jar?raw=true) inside the `jdbc/` folder,
+- Put both [the mapping model](https://raw.githubusercontent.com/obidea/semantika-api/master/model/empdb.mod.xml) and [the ontology](https://raw.githubusercontent.com/obidea/semantika-api/master/model/empdb.owl) inside `model/` folder,
+- Edit the `application.cfg.xml` to configure the database setting and model resources. Code snippet:
 ```
 <semantika-configuration>
    <application-factory name="empdb-app">
@@ -79,8 +79,8 @@ root
    </application-factory>
 </semantika-configuration>
 ```
-6. Run `./semantika application.cfg.xml` in the command prompt.
-7. Try some of the queries [here](https://github.com/obidea/semantika/tree/gh-pages/demo). Note: you can omit the lines with `PREFIX:` definition.
+- Run `./semantika application.cfg.xml` in the command prompt.
+- Try some of the queries [here](https://github.com/obidea/semantika/tree/gh-pages/demo). Note: you can omit the lines with `PREFIX:` definition.
 
 Need Help?
 ----------
