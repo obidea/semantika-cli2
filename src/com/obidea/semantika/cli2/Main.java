@@ -36,7 +36,7 @@ public class Main
    public static void main(String[] args)
    {
       Main main = new Main();
-      main.initialize(getConfig(args));
+      main.initialize(getConfig(args), debugMode(args));
    }
 
    private static String getConfig(String[] args)
@@ -44,9 +44,25 @@ public class Main
       return args[0];
    }
 
-   private void initialize(String config)
+   private static boolean debugMode(String[] args)
+   {
+      if (args.length > 1) {
+         if (args[1].equals("-debug")) {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   private void initialize(String config, boolean isDebugMode)
    {
       System.out.print("Initializing..."); //$NON-NLS-1$
+      
+      if (isDebugMode) {
+         for (Logger logger : sLoggers) {
+            logger.setLevel(Level.DEBUG);
+        }
+      }
       try {
          ApplicationManager manager = new ApplicationFactory().configure(config).createApplicationManager();
          openConsole(manager.getApplicationName(),

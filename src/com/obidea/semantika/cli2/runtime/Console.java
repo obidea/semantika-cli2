@@ -36,6 +36,8 @@ public class Console
    private ConsoleReader mConsoleReader;
    private ConsoleSession mConsoleSession;
 
+   private static final String NEWLINE = System.getProperty("line.separator");
+
    public Console(String name, IQueryEngine engine, Map<String, String> prefixes, Terminal terminal) throws IOException
    {
       this(name, engine, prefixes, System.in, System.out, System.err, terminal);
@@ -146,14 +148,13 @@ public class Console
             }
             
             if (endOfCommand(line)) {
-               line = line.substring(0, line.length() - 2); // remove EOC marker
                loop = false;
             }
             else {
                loop = true;
                first = false;
             }
-            command.append(line).append("\n");
+            command.append(line).append(NEWLINE);
             
             // Save to history if the line is not empty
             if (line.trim().length() > 0) {
@@ -172,10 +173,10 @@ public class Console
 
    private boolean endOfCommand(String line)
    {
-      if (line.length() < 2) {
-         return false;
+      if (line.length() == 0) {
+         return true; // if only a blank line then it ends
       }
-      return line.charAt(line.length() - 1) == line.charAt(line.length() - 2);
+      return false;
    }
 
    private void interrupt()
