@@ -46,8 +46,8 @@ prompt> set prefix "smp" with namespace "http://example.org/simple#"
 
 Insert a blank line by tapping the <ENTER> key twice to run the command.
 
-Demo Application
-----------------
+Installation
+------------
 
 - [Download and unzip the latest release](https://github.com/obidea/semantika-cli2/releases). The package has a directory structure:
 ```
@@ -61,26 +61,10 @@ root/
   semantika
   semantika-cli-2.0.jar
 ```
-- [Download and unzip the demo empdb database](https://github.com/obidea/semantika-api/releases/download/v1.1/h2-semantika_24-02-2014.zip). Run the H2 database in your local computer.
-- Put the [H2 driver](https://github.com/obidea/semantika-api/blob/master/jdbc/h2-1.3.174.jar?raw=true) inside the `jdbc/` folder,
-- Put both [the mapping model](https://raw.githubusercontent.com/obidea/semantika-api/master/model/empdb.mod.xml) and [the ontology](https://raw.githubusercontent.com/obidea/semantika-api/master/model/empdb.owl) inside `model/` folder,
-- Edit the `application.cfg.xml` to configure the database setting and model resources. Code snippet:
-```
-<semantika-configuration>
-   <application-factory name="empdb-app">
-      <data-source>
-         <property name="connection.url">jdbc:h2:tcp://localhost/empdb</property>
-         <property name="connection.driver_class">org.h2.Driver</property>
-         <property name="connection.username">sa</property>
-         <property name="connection.password"></property>
-      </data-source>
-      <ontology-source resource="model/empdb.owl" />
-      <mapping-source resource="model/empdb.mod.xml" />
-   </application-factory>
-</semantika-configuration>
-```
+- Put your JDBC database driver to the `jdbc/` folder,
+- Put your mapping model and ontology (optional) to the `model/` folder,
+- Prepare the `application.cfg.xml` to configure the database setting and model resources,
 - Run `./semantika application.cfg.xml` in the command prompt.
-- Try some of the queries [here](https://github.com/obidea/semantika/tree/gh-pages/demo). Note: you can omit the lines with `PREFIX:` definition.
 
 Need Help?
 ----------
