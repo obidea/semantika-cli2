@@ -18,6 +18,30 @@ Add `-debug` option to run the CLI tool in debugging mode.
 $ ./semantika application.cfg.xml -debug
 ```
 
+Installation
+------------
+
+- [Download and unzip the latest release](https://github.com/obidea/semantika-cli2/releases). The package has a directory structure:
+```
+root/
+  +-jdbc/
+  +-lib/
+  +-model/
+  LICENSE.txt
+  NOTICE.txt
+  application.cfg.xml
+  semantika
+  semantika-cli-2.0.jar
+```
+- Put your JDBC database driver to the `jdbc/` folder,
+- Put your mapping model and ontology (optional) to the `model/` folder,
+- Prepare the `application.cfg.xml` to configure the database setting and model resources.
+
+**Running the application**. Make sure your database is running in the background and run the command:
+```
+$ ./semantika application.cfg.xml
+```
+
 Commands
 --------
 
@@ -45,30 +69,6 @@ prompt> set prefix "smp" with namespace "http://example.org/simple#"
 ```
 
 Insert a blank line by tapping the <ENTER> key twice to run the command.
-
-Installation
-------------
-
-- [Download and unzip the latest release](https://github.com/obidea/semantika-cli2/releases). The package has a directory structure:
-```
-root/
-  +-jdbc/
-  +-lib/
-  +-model/
-  LICENSE.txt
-  NOTICE.txt
-  application.cfg.xml
-  semantika
-  semantika-cli-2.0.jar
-```
-- Put your JDBC database driver to the `jdbc/` folder,
-- Put your mapping model and ontology (optional) to the `model/` folder,
-- Prepare the `application.cfg.xml` to configure the database setting and model resources.
-
-**Running the application**. Make sure your database is running in the background and run the command:
-```
-$ ./semantika application.cfg.xml
-```
 
 Need Help?
 ----------
