@@ -63,8 +63,12 @@ root/
 ```
 - Put your JDBC database driver to the `jdbc/` folder,
 - Put your mapping model and ontology (optional) to the `model/` folder,
-- Prepare the `application.cfg.xml` to configure the database setting and model resources,
-- Run `./semantika application.cfg.xml` in the command prompt.
+- Prepare the `application.cfg.xml` to configure the database setting and model resources.
+
+**Running the application**. Make sure your database is running in the background and run the command:
+```
+$ ./semantika application.cfg.xml
+```
 
 Need Help?
 ----------
